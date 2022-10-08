@@ -51,31 +51,31 @@ constructor(IERC20 _usdc, IERC20 _GauRaksha, address payable _ownersAddress){
         if(_slotId == 1){
             require(IERC20(usdc).allowance(msg.sender,address(this)) >= slotPriceInUSDC[1],"ICO1: Need more allowance");
             IERC20(usdc).transferFrom(msg.sender,ownersAddress,10);
-            IERC20(GauRaksha).transfer(msg.sender,(50000 * (10 ** 18)));
+            IERC20(GauRaksha).transfer(msg.sender,(50000 * (10 ** 18))); //50000 gr tokens
             
         }
         if(_slotId == 2){ 
             require(IERC20(usdc).allowance(msg.sender,address(this)) >= slotPriceInUSDC[2],"ICO2: Need more allowance");
             IERC20(usdc).transferFrom(msg.sender,ownersAddress,20);
-            IERC20(GauRaksha).transfer(msg.sender,(120000 * (10 ** 18)));
+            IERC20(GauRaksha).transfer(msg.sender,(120000 * (10 ** 18))); // 120000 gr tokens
        
         }
         if(_slotId == 3){ 
             require(IERC20(usdc).allowance(msg.sender,address(this)) > slotPriceInUSDC[3],"ICO3: Need more allowance");
             IERC20(usdc).transferFrom(msg.sender,ownersAddress,30);
-            IERC20(GauRaksha).transfer(msg.sender,(200000 * (10 ** 18)));
+            IERC20(GauRaksha).transfer(msg.sender,(200000 * (10 ** 18))); //200000 gr tokens
        
         }
         if(_slotId == 4){ 
             require(IERC20(usdc).allowance(msg.sender,address(this)) > slotPriceInUSDC[4],"ICO4: Need more allowance");
             IERC20(usdc).transferFrom(msg.sender,ownersAddress,40);
-            IERC20(GauRaksha).transfer(msg.sender,(300000 * (10 ** 18)));
+            IERC20(GauRaksha).transfer(msg.sender,(300000 * (10 ** 18))); //300000 gr tokens
        
         }
         if(_slotId == 5){ 
             require(IERC20(usdc).allowance(msg.sender,address(this)) > slotPriceInUSDC[5],"ICO5: Need more allowance");
             IERC20(usdc).transferFrom(msg.sender,ownersAddress,50);
-            IERC20(GauRaksha).transfer(msg.sender,(900000 * (10 ** 18)));
+            IERC20(GauRaksha).transfer(msg.sender,(900000 * (10 ** 18))); //900000 gr tokens 
        
         }
         slotId[_slotId]--;
@@ -92,5 +92,5 @@ constructor(IERC20 _usdc, IERC20 _GauRaksha, address payable _ownersAddress){
         IERC20(GauRaksha).transfer(msg.sender,balanceAmount);
     }
 
-  
+  //enter certain amount of usdc to buy a amount of gr token .
 }

@@ -24,7 +24,7 @@ describe("setup", () => {
   // before(async ()=> {
   it("should be equal to given total supply", async function () {
     accounts = await ethers.getSigners();
-    [owner,mod, u1, u2, u3, u4] = accounts;
+    [owner,mod, u1, u2, u3, u4, u5] = accounts;
     const tokeninstance = await ethers.getContractFactory('GauRaksha')
     const usdcinstance = await ethers.getContractFactory("USDT")
     const icoinstance = await ethers.getContractFactory("ICO")
@@ -41,7 +41,7 @@ describe("setup", () => {
     console.log(" ico is depolyed to ", ico.address);
 
     
-    for (let i = 2; i < 5; i++) {
+    for (let i = 2; i < 7; i++) {
       await usdc.transfer(accounts[i].address, 1000);
       //provding asset to buy in ico 
       console.log(`${accounts[i].address} received ${(await usdc.balanceOf(accounts[i].address)).toString()} usdc tokens`);
@@ -82,11 +82,19 @@ describe("setup", () => {
     //getting allowance from user for usdc to ico-contract to transfer to owner account 
     await usdc.connect(u1).approve(ico.address,"1000000000000");
     await ico.connect(u1).buyWithUSDC("1");
+
     await usdc.connect(u2).approve(ico.address,"1000000000000");
-    await ico.connect(u2).buyWithUSDC("1");
+    await ico.connect(u2).buyWithUSDC("2");
+
     await usdc.connect(u3).approve(ico.address,"1000000000000");
-    await ico.connect(u3).buyWithUSDC("1");
-    for (let i = 2; i < 5; i++) {
+    await ico.connect(u3).buyWithUSDC("3");
+
+    await usdc.connect(u4).approve(ico.address,"1000000000000");
+    await ico.connect(u4).buyWithUSDC("4");
+
+    await usdc.connect(u5).approve(ico.address,"1000000000000");
+    await ico.connect(u5).buyWithUSDC("5");
+    for (let i = 2; i < 7; i++) {
       console.log(`${accounts[i].address} received ${(await token.balanceOf(accounts[i].address)).toString()} GR tokens`);
     }
   })
@@ -96,7 +104,7 @@ describe("setup", () => {
   })
   it('should update value usdc in mods address', async function (){
     modbal = await usdc.balanceOf(mod.address);
-    expect(modbal).to.equal('30')
+    expect(modbal).to.equal('150')
     console.log('balance of the admin ',modbal.toString());
   })
 });
