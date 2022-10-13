@@ -18,11 +18,12 @@ contract USDT is ERC20{
 
 contract ICO is Ownable{
     IERC20 public usdc;
+    IERC20 public BNB;
     IERC20 public GauRaksha;
     address payable public ownersAddress;
     mapping(uint256 => uint256) public slotId; 
     mapping(uint256 => uint256) public slotPriceInUSDC; 
-   
+    uint256 private GRtokenprice; 
 
 
 constructor(IERC20 _usdc, IERC20 _GauRaksha, address payable _ownersAddress){
@@ -91,6 +92,15 @@ constructor(IERC20 _usdc, IERC20 _GauRaksha, address payable _ownersAddress){
         uint256 balanceAmount = IERC20(GauRaksha).balanceOf(address(this));
         IERC20(GauRaksha).transfer(msg.sender,balanceAmount);
     }
+
+    function BuyGR(uint256 amount) public {
+        //wei (1*18)
+        // price of the token 
+
+        // specify the value of GR token for per wei
+         ///uint256 tokens = weiAmount.mul(rate);
+    }
+
 
   //enter certain amount of usdc to buy a amount of gr token .
 }
