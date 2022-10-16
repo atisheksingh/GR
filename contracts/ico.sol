@@ -91,6 +91,47 @@ constructor(IERC20 _usdc, IERC20 _GauRaksha, address payable _ownersAddress){
         uint256 balanceAmount = IERC20(GauRaksha).balanceOf(address(this));
         IERC20(GauRaksha).transfer(msg.sender,balanceAmount);
     }
-
-  //enter certain amount of usdc to buy a amount of gr token .
+  
+    function buyGR(uint256 amount) public  {
+        if(amount > 0 || amount <999 ){
+        require(IERC20(usdc).allowance(msg.sender,address(this)) >= slotPriceInUSDC[1],"ICO1: Need more allowance");
+        IERC20(usdc).transferFrom(msg.sender,ownersAddress,10);
+        IERC20(GauRaksha).transfer(msg.sender,(50000 * (10 ** 18))); //50000 gr tokens
+        }
+        else if(amount > 999 || amount < 1999){
+        uint256 total_amount = bonusCalculator(0, amount);
+        require(IERC20(usdc).allowance(msg.sender,address(this)) >= slotPriceInUSDC[1],"ICO1: Need more allowance");
+        IERC20(usdc).transferFrom(msg.sender,ownersAddress,10);
+        IERC20(GauRaksha).transfer(msg.sender,total_amount); //50000 gr tokens
+        }
+        else if (amount>1999|| amount< 3999){
+        uint256 total_amount = bonusCalculator(1, amount);
+        require(IERC20(usdc).allowance(msg.sender,address(this)) >= slotPriceInUSDC[1],"ICO1: Need more allowance");
+        IERC20(usdc).transferFrom(msg.sender,ownersAddress,10);
+        IERC20(GauRaksha).transfer(msg.sender,total_amount); //50000 gr tokens
+        }else{
+        uint256 total_amount = bonusCalculator(2, amount);
+        require(IERC20(usdc).allowance(msg.sender,address(this)) >= slotPriceInUSDC[1],"ICO1: Need more allowance");
+        IERC20(usdc).transferFrom(msg.sender,ownersAddress,10);
+        IERC20(GauRaksha).transfer(msg.sender,total_amount); //50000 gr tokens
+        }
+    }
+    function bonusCalculator(uint8 slot , uint amount) internal pure  returns(uint256)  {
+        if(slot == 0 ){
+            amount = amount.div(100).mul(5);
+             return amount;
+        }
+        else if(slot == 1){
+            amount = amount.div(100).mul(5);
+             return amount;
+        }
+        else if (slot ==2 ){
+            amount = amount.div(100).mul(5);
+            return amount;
+        }
+        else {
+            revert("incorrect slot is choosed"); 
+        }
+    }
+  
 }
