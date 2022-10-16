@@ -18,11 +18,12 @@ contract USDT is ERC20{
 
 contract ICO is Ownable{
     IERC20 public usdc;
+    IERC20 public BNB;
     IERC20 public GauRaksha;
     address payable public ownersAddress;
     mapping(uint256 => uint256) public slotId; 
     mapping(uint256 => uint256) public slotPriceInUSDC; 
-   
+    uint256 private GRtokenprice; 
 
 
 constructor(IERC20 _usdc, IERC20 _GauRaksha, address payable _ownersAddress){
